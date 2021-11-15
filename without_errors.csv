@@ -1,0 +1,47 @@
+,Textbox58,ModGroupType1,Error1,errorflag1,CourseCode,CrsAccredType,CourseTitle,CrsTcount,CrsAllCount
+0,Scaling group  1,Type T,,,105,T,DRAMA,0,11
+1,Scaling group  1,Type T,,,330,T,LITERATURE,0,43
+2,Scaling group  1,Type T,,,332,T,ENGLISH,0,146
+5,Scaling group  10,Type T,,,1374,T,SPECIALIST MATHEMATICS,0,23
+6,Scaling group  10,Type T,,,1375,T,MATHEMATICAL APPLICATIONS,0,59
+7,Scaling group  10,Type T,,,1376,T,MATHEMATICAL METHODS,0,86
+8,Scaling group  10,Type T,,,1455,T,SPECIALIST METHODS,0,56
+9,Scaling group  16,Type T,,,1207,T,DIGITAL TECHNOLOGIES,0,9
+11,Scaling group  16,Type T,,,1240,T,ROBOTICS AND MECHATRONICS,0,3
+13,Scaling group  20,Type T,,,2314,T,PHYSICS,0,49
+14,Scaling group  21,Type T,,,2308,T,CHEMISTRY,0,79
+15,Scaling group  23,Type T,,,2411,T,EARTH & ENVIRONMENTAL SCIENCE,0,14
+16,Scaling group  23,Type T,,,2412,T,BIOLOGY,0,50
+18,Scaling group  30,Type T,,,3040,T,PHILOSOPHY,0,4
+19,Scaling group  30,Type T,,,3073,T,MODERN HISTORY,0,21
+20,Scaling group  30,Type T,,,3079,T,ANCIENT HISTORY,0,5
+22,Scaling group  42,Type T,,,4125,T,BUSINESS,0,29
+24,Scaling group  43,Type T,,,4124,T,LEGAL STUDIES,0,23
+25,Scaling group  44,Type T,,,4109,T,ECONOMICS,0,30
+35,Scaling group  50,Type T,,,5646,T,BEGINNING SPANISH,0,2
+40,Scaling group  50,Type T,,,5696,T,CONTINUING CHINESE,0,4
+41,Scaling group  50,Type T,,,5697,T,CONTINUING FRENCH,0,3
+42,Scaling group  50,Type T,,,5698,T,CONTINUING JAPANESE,0,8
+44,Scaling group  50,Type T,,,7198,T,MUSIC,0,2
+45,Scaling group  60,Type T,,,6192,T,PSYCHOLOGY,0,51
+48,Scaling group  65,Type T,,,6599,T,GLOBAL STUDIES,0,28
+49,Scaling group  71,Type T,,,109,T,MEDIA,0,6
+50,Scaling group  71,Type T,,,7201,T,VISUAL ARTS,0,17
+51,Scaling group  71,Type T,,,8049,T,PHOTOGRAPHY,0,7
+52,Scaling group  72,Type T,,,7164,T,HOSPITALITY,0,3
+57,Scaling group  72,Type T,,,8466,T,DESIGN & EMERGING TECHNOLOGIES,0,3
+58,Scaling group  72,Type T,,,8470,T,DESIGN AND TEXTILES,0,11
+59,Scaling group  72,Type T,,,8472,T,ENGINEERING STUDIES,0,6
+60,Scaling group  72,Type T,,,8474,T,DESIGN & GRAPHICS,0,11
+61,Scaling group  90,Type T,,,9471,T,EXERCISE SCIENCE,0,42
+63,Scaling group  94,Type H,,,108,A,DRAMA,0,2
+68,Scaling group  94,Type H,,,329,A,ESSENTIAL ENGLISH,0,2
+75,Scaling group  94,Type H,,,1377,A,ESSENTIAL MATHEMATICS,0,3
+83,Scaling group  94,Type H,,,4136,A,BUSINESS,0,1
+92,Scaling group  94,Type H,,,7169,A,HOSPITALITY,0,1
+95,Scaling group  94,Type H,,,7204,A,VISUAL ARTS,0,1
+103,Scaling group  94,Type H,,,8467,A,DESIGN & EMERGING TECHNOLOGIES,0,1
+106,Scaling group  94,Type H,,,8471,A,DESIGN AND TEXTILES,0,1
+111,Scaling group  94,Type H,,,9470,A,PHYSICAL EDUCATION STUDIES,0,2
+115,Scaling group  95,Type H,,,2562,E,AHC TRAINING PACKAGE,0,1
+119,Scaling group  95,Type H,,,7007,E,HOSPITALITY TRAINING PACKAGE,0,1
