@@ -48,11 +48,35 @@ def calculate_aggregate_score(student, past_params, scaling_groups):
         return int(round(scaled_scores[0] + scaled_scores[1] + scaled_scores[2] + 0.6 * scaled_scores[3], 0))
     
 def predict_atar(aggregate_score, atar_bounds):
+    '''
+    Predicts an ATAR given an aggregate score and a list of lower bounds
+
+    Parameters
+    ----------
+    aggregate_score : int
+        a student's aggregate score rounded to the nearest integer
+    
+    atar_bounds : list
+        a list of tuples of the form (lower_bound, atar)
+    '''
     for lower, atar in atar_bounds:
         if aggregate_score >= lower:
             return atar
 
 def predicted_atar_range(predicted_atar):
+    '''
+    Creates a string with the predicted ATAR range as a 10 point range
+
+    Parameters
+    ----------
+    predicted_atar : int
+        the student's predicted ATAR to the nearest int
+    
+    Returns
+    -------
+    str
+        a string containing the ten point ATAR range
+    '''
     if predicted_atar > 96:
         return "90 - 100"
     else:
