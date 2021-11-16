@@ -59,10 +59,11 @@ def read_acs_export(filename):
                 year_level = course_df['Year_Level'].iloc(0)
                 num_units = len(course_df['Unit_Score'])
 
-                if year_level == 12 and num_units < 3:
-                    course_dict['Major'] = False
-                elif year_level == 11 and num_units < 2:
-                    course_dict['Major'] = False
+                if 'MATHEMATIC' not in course_dict['Course_Title'] or 'ENGLISH' not in course_dict['Course_Title']:
+                    if year_level == 12 and num_units < 3:
+                        course_dict['Major'] = False
+                    elif year_level == 11 and num_units < 2:
+                        course_dict['Major'] = False
 
                 unit_scores = [score for score in course_df['Unit_Score'] if score != 0]
                 
