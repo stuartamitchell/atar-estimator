@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>ATAR Estimator</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+        <section class="content">
+            <header>
+                <h1>ATAR Estimator</h1>
+            </header>
+
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <label for="acs_export">acs-Student Reports-Academic Record: </label>
+                <input type="file" name="acs_export"><br><br>
+                <label for="scaling_groups">acs-College Reports-Course in Scaling Groups: </label>
+                <input type="file" name="scaling_groups"><br><br>
+                <input type="submit" value="Generate ATAR Estimates">
+            </form>
+        
+            {% with messages = get_flashed_messages(with_categories=false) %}
+                {% if messages %}
+                    <ul id="messages">
+                        {% for message in messages %}
+                            <li class="message">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+                
+            {% if download_file %}
+                <a href="/downloads/atar_estimates.xlsx">Download ATAR estimates</a>
+            {% endif %}
+        </section>
+    </body>
+</html>

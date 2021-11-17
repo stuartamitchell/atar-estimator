@@ -1,6 +1,4 @@
-import os
 import pandas as pd
-from read_data import load_data
 
 def calculate_aggregate_score(student, past_params, scaling_groups):
     '''
@@ -82,29 +80,20 @@ def predicted_atar_range(predicted_atar):
     else:
         return str(predicted_atar - 7) + " - " + str(predicted_atar + 3)
 
-def write_atar_estimates_to_csv(student_predictions):
+def produce_atar_estimates(students, past_params, scaling_groups, atar_bounds):
     '''
-    Writes the student's predicted ATARs to csv
+    Produces the students predicted ATAR and ATAR range and stores it in a dataframe
 
     Parameters
     ----------
-    student_predictions : list
-        a list of students with their predicted ATAR range
-    '''
-    df = pd.DataFrame(student_predictions)
-    pd.DataFrame.to_csv(df, os.path.abspath(os.path.join(__file__, '../../output/atar_estimates.csv')))
-        
-def main():
-    data_path = os.path.abspath(os.path.join(__file__, '../../data'))
-    acs_export_file = os.path.join(data_path, 'y12-acs-export.csv')
-    past_params_file = os.path.join(data_path, 'past_params.csv')
-    scaling_groups_file = os.path.join(data_path, 'scaling_groups.csv')
-    atar_bounds_file = os.path.join(data_path, 'atar_bounds.csv')
+    students : list
+        a list containing the student data
 
-    students, past_params, scaling_groups, atar_bounds = load_data(acs_export_file, 
-                                                                past_params_file, 
-                                                                scaling_groups_file,
-                                                                atar_bounds_file)
+    Returns
+    -------
+    dataframe
+        a dataframe containing the students' names, predicted ATAR, and ATAR range
+    '''
     student_predictions = []
 
     for student in students:
@@ -116,7 +105,4 @@ def main():
                                     'Predicted_Range': atar_range 
                                 })
     
-    write_atar_estimates_to_csv(student_predictions)
-
-if __name__ == '__main__':
-    main()
+    return pd.DataFrame(student_predictions)

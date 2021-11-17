@@ -1,0 +1,7 @@
+ul#messages {
+    list-style-type: none;
+}
+
+li.message {
+    color: red
+}
