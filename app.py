@@ -15,8 +15,8 @@ def index():
     if request.method == 'POST':
         acs_export = request.files['acs_export']
         scaling_groups = request.files['scaling_groups']
-        past_params_file = os.path.join(app.root_path, 'data/past_params.csv')
-        atar_bounds_file = os.path.join(app.root_path, 'data/atar_bounds.csv')
+        past_params_file = request.files['past_params']
+        atar_bounds_file = request.files['atar_bounds']
 
         students, past_params, scaling_groups, atar_bounds = load_data(acs_export, 
                                                                         past_params_file, 
