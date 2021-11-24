@@ -52,6 +52,9 @@ def read_acs_export(file):
                 courses.append(row['Course_Title'])
 
         for course in courses:
+            if '(' in course:
+                course = course[:-5]
+            
             course_dict = { "Course_Title": course, 'Major': True, "Avg_Unit_Score": 0 }
             course_df = student_df.loc[student_df['Course_Title'] == course]
 
