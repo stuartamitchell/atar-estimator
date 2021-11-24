@@ -15,8 +15,8 @@ def calculate_aggregate_score(student, past_params, scaling_groups):
 
     Returns
     -------
-    int
-        the student's aggregate score rounded to the nearest integer
+    (dict, int)
+        a tuple containing the student's best four courses and the aggregate score rounded to the nearest integer
     '''
     majors = [course for course in student['Courses'] if course['Major'] == True]
     minors = [course for course in student['Courses'] if course['Major'] == False]
@@ -38,12 +38,21 @@ def calculate_aggregate_score(student, past_params, scaling_groups):
 
         scaled_scores = []
 
-        for major in best_four:
-            scaling_group = scaling_groups[major['Course_Title']]
-            scaled_score = major['Avg_Unit_Score'] * past_params[scaling_group]['b'] + past_params[scaling_group]['a']
+        for course in best_four:
+            scaling_group = scaling_groups[course['Course_Title']]
+            scaled_score = course['Avg_Unit_Score'] * past_params[scaling_group]['b'] + past_params[scaling_group]['a']
             scaled_scores.append(scaled_score)
 
-        return int(round(scaled_scores[0] + scaled_scores[1] + scaled_scores[2] + 0.6 * scaled_scores[3], 0))
+        courses = {}
+
+        courses['Major1'] = best_four[0]['Course_Title']
+        courses['Major2'] = best_four[1]['Course_Title']
+        courses['Major3'] = best_four[2]['Course_Title']
+        courses['Minor'] = best_four[3]['Course_Title']
+
+        aggregate_score = int(round(scaled_scores[0] + scaled_scores[1] + scaled_scores[2] + 0.6 * scaled_scores[3], 0))
+
+        return courses, aggregate_score
     
 def predict_atar(aggregate_score, atar_bounds):
     '''
@@ -97,12 +106,16 @@ def produce_atar_estimates(students, past_params, scaling_groups, atar_bounds):
     student_predictions = []
 
     for student in students:
-        aggregate_score = calculate_aggregate_score(student, past_params, scaling_groups)
+        courses, aggregate_score = calculate_aggregate_score(student, past_params, scaling_groups)
         atar_prediction = predict_atar(aggregate_score, atar_bounds)
         atar_range = predicted_atar_range(atar_prediction)
         student_predictions.append({ 'Full_Name': student['Full_Name'], 
                                     'ATAR_Prediction': atar_prediction,
-                                    'Predicted_Range': atar_range 
+                                    'Predicted_Range': atar_range,
+                                    'Major1': courses['Major1'],
+                                    'Major2': courses['Major2'],
+                                    'Major3': courses['Major3'],
+                                    'Minor': courses['Minor']
                                 })
     
     return pd.DataFrame(student_predictions)
