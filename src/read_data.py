@@ -28,6 +28,7 @@ def read_acs_export(file):
     read_df['CoursewithOtherSchool1'] = read_df['CoursewithOtherSchool1'].str.rstrip()
 
     simplified_df = pd.DataFrame({
+            'Student_Id': read_df['StudentId1'],
             'Full_Name': read_df['Fullname1'],
             'Year_Level': read_df['YearLevel1'],
             'Course_Title': read_df['CoursewithOtherSchool1'],
@@ -42,8 +43,9 @@ def read_acs_export(file):
 
     for name in student_names:
         student_df = simplified_df.loc[simplified_df['Full_Name'] == name]
+        student_id = str(student_df.iloc[0]['Student_Id']).rjust(7, '0')
 
-        student = {'Full_Name': name, 'Courses': []}
+        student = { 'Student_Id': student_id, 'Full_Name': name, 'Courses': [] }
 
         courses = []
 

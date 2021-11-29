@@ -109,7 +109,9 @@ def produce_atar_estimates(students, past_params, scaling_groups, atar_bounds):
         courses, aggregate_score = calculate_aggregate_score(student, past_params, scaling_groups)
         atar_prediction = predict_atar(aggregate_score, atar_bounds)
         atar_range = predicted_atar_range(atar_prediction)
-        student_predictions.append({ 'Full_Name': student['Full_Name'], 
+        student_predictions.append({
+                                    'Student_Id': student['Student_Id'], 
+                                    'Full_Name': student['Full_Name'], 
                                     'ATAR_Prediction': atar_prediction,
                                     'Predicted_Range': atar_range,
                                     'Major1': courses['Major1'],
