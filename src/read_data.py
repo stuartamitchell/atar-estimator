@@ -50,24 +50,25 @@ def read_acs_export(file):
         courses = []
 
         for i, row in student_df.iterrows():
-            if row['Course_Title'] not in courses and row['Course_Title'] != 'UNGROUPED UNITS' and row['Course_Type'] == 'T':
+            if row['Course_Title'] not in courses and '(' not in row['Course_Title'] and row['Course_Title'] != 'UNGROUPED UNITS' and row['Course_Type'] == 'T':
                 courses.append(row['Course_Title'])
 
+        majors = 0
+
         for course in courses:
-            if '(' in course:
-                course = course[:-5]
-            
             course_dict = { "Course_Title": course, 'Major': True, "Avg_Unit_Score": 0 }
             course_df = student_df.loc[student_df['Course_Title'] == course]
 
             year_level = course_df['Year_Level'].iloc(0)
             num_units = len(course_df['Unit_Score'])
 
-            if 'MATHEMATIC' not in course_dict['Course_Title'] or 'ENGLISH' not in course_dict['Course_Title']:
+            if 'MATH' not in course_dict['Course_Title'] or 'ENGLISH' not in course_dict['Course_Title']:
                 if year_level == 12 and num_units < 3:
                     course_dict['Major'] = False
                 elif year_level == 11 and num_units < 2:
                     course_dict['Major'] = False
+            else:
+                majors += 1
 
             unit_scores = [score for score in course_df['Unit_Score'] if score != 0]
             
@@ -76,9 +77,9 @@ def read_acs_export(file):
 
             student['Courses'].append(course_dict)
         
-        students.append(student)
+        if majors > 2:
+            students.append(student)
         
-            
     return students
 
 def read_atar_bounds(file):
