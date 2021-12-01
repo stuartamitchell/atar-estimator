@@ -56,8 +56,7 @@ def read_acs_export(file):
         majors = 0
 
         for course in courses:
-            course_dict = { "Course_Title": course, 'Major': True, "Avg_Unit_Score": 0 }
-            majors = majors + 1
+            course_dict = { "Course_Title": course, "Avg_Unit_Score": 0 }
             course_df = student_df.loc[student_df['Course_Title'] == course]
 
             year_level = course_df['Year_Level'].iloc(0)
@@ -66,10 +65,14 @@ def read_acs_export(file):
             if 'MATH' not in course_dict['Course_Title'] or 'ENGLISH' not in course_dict['Course_Title']:
                 if year_level == 12 and num_units < 3:
                     course_dict['Major'] = False
-                    majors = majors - 1
                 elif year_level == 11 and num_units < 2:
                     course_dict['Major'] = False
-                    majors = majors - 1
+                else:
+                    course_dict['Major'] = True
+                    majors = majors + 1
+            else:
+                course_dict['Major'] = True
+                majors = majors + 1
 
             unit_scores = [score for score in course_df['Unit_Score'] if score != 0]
             
