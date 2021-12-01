@@ -81,6 +81,8 @@ def read_acs_export(file):
 
             student['Courses'].append(course_dict)
         
+        print("Majors: " + str(majors))
+
         if majors > 2:
             students.append(student)
         
