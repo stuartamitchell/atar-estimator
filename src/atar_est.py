@@ -84,10 +84,12 @@ def predicted_atar_range(predicted_atar):
     str
         a string containing the ten point ATAR range
     '''
-    if predicted_atar > 96:
+    if predicted_atar == 99:
         return "90 - 100"
+    elif predicted_atar > 97:
+        return str(predicted_atar - 9) + " - " + str(predicted_atar + 1)
     else:
-        return str(predicted_atar - 7) + " - " + str(predicted_atar + 3)
+        return str(predicted_atar - 8) + " - " + str(predicted_atar + 2)
 
 def produce_atar_estimates(students, past_params, scaling_groups, atar_bounds):
     '''
@@ -111,7 +113,9 @@ def produce_atar_estimates(students, past_params, scaling_groups, atar_bounds):
         atar_range = predicted_atar_range(atar_prediction)
         student_predictions.append({
                                     'Student_Id': student['Student_Id'], 
-                                    'Full_Name': student['Full_Name'], 
+                                    'Surname': student['Surname'],
+                                    'Given_Names': student['Given_Names'],
+                                    'Aggregate_Score': aggregate_score,
                                     'ATAR_Prediction': atar_prediction,
                                     'Predicted_Range': atar_range,
                                     'Major1': courses['Major1'],

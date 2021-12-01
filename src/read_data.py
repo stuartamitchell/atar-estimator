@@ -43,36 +43,42 @@ def read_acs_export(file):
 
     for name in student_names:
         student_df = simplified_df.loc[simplified_df['Full_Name'] == name]
+        split_name = name.split(', ')
+        surname = split_name[0]
+        given_names = split_name[1]
         student_id = str(student_df.iloc[0]['Student_Id']).rjust(7, '0')
 
-        student = { 'Student_Id': student_id, 'Full_Name': name, 'Courses': [] }
+        student = { 'Student_Id': student_id, 'Surname': surname, 'Given_Names': given_names, 'Courses': [] }
 
         courses = []
+        year_level = student_df['Year_Level'].iloc[0]
 
         for i, row in student_df.iterrows():
-            if row['Course_Title'] not in courses and '(' not in row['Course_Title'] and row['Course_Title'] != 'UNGROUPED UNITS' and row['Course_Type'] == 'T':
+            if (row['Course_Title'] not in courses) and ('(' not in row['Course_Title']) and (row['Course_Title'] != 'UNGROUPED UNITS') and (row['Course_Type'] == 'T'):
                 courses.append(row['Course_Title'])
 
         majors = 0
+        minors = 0
 
         for course in courses:
             course_dict = { "Course_Title": course, "Avg_Unit_Score": 0 }
             course_df = student_df.loc[student_df['Course_Title'] == course]
 
-            year_level = course_df['Year_Level'].iloc(0)
             num_units = len(course_df['Unit_Score'])
 
-            if 'MATH' not in course_dict['Course_Title'] or 'ENGLISH' not in course_dict['Course_Title']:
-                if year_level == 12 and num_units < 3:
+            if course in ['SPECIALIST MATHEMATICS', 'SPECIALIST METHODS', 'MATHEMATICAL METHODS', 'MATHEMATICAL APPLIATIONS', 'ENGLISH', 'LITERATURE']:
+                course_dict['Major'] = True
+                majors = majors + 1
+            else:
+                if (year_level == 12) and (num_units < 3):
                     course_dict['Major'] = False
-                elif year_level == 11 and num_units < 2:
+                    minors = minors + 1
+                elif (year_level == 11) and (num_units < 2):
                     course_dict['Major'] = False
+                    minors = minors + 1
                 else:
                     course_dict['Major'] = True
                     majors = majors + 1
-            else:
-                course_dict['Major'] = True
-                majors = majors + 1
 
             unit_scores = [score for score in course_df['Unit_Score'] if score != 0]
             
@@ -81,7 +87,7 @@ def read_acs_export(file):
 
             student['Courses'].append(course_dict)
         
-        print("Majors: " + str(majors))
+        print('Name: ' + name +  ' Majors: ' + str(majors) + ' Minors: ' + str(minors))
 
         if majors > 2:
             students.append(student)
